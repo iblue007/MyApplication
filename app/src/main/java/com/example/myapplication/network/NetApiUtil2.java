@@ -9,6 +9,8 @@ import com.example.myapplication.network.base.HttpRequestParam;
 import com.example.myapplication.network.base.NetConnectionIntercepter;
 import com.example.myapplication.network.base.ServerResult;
 import com.example.myapplication.network.base.ServerResultHeader;
+import com.example.myapplication.util.Md5Util;
+import com.example.myapplication.util.StringUtils;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -48,7 +50,18 @@ public class NetApiUtil2 {
     //--------------------------------post请求 方法部分↓-----------------------------------------------------------
 
     //待自提订单 - - 待自提订单
-    public static final ServerResult<postMessageBean> PostWaitOrder(Context context, String shortMsg, String msgSender, double orderScore, String sign) {
+    public static final ServerResult<postMessageBean> PostWaitOrder(Context context, String shortMsg, String msgSender, double orderScore) {
+
+
+        HashMap<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("deviceKey", ApiUrlManager.DEVICE_KEY + "");
+        paramMap.put("shortMsg", shortMsg + "");
+        paramMap.put("msgSend", msgSender + "");
+        paramMap.put("orderScore", orderScore + "");
+        String paramsStr = StringUtils.ascriAsc(paramMap);
+        String sign = Md5Util.MD5Encode(paramsStr);
+
+
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         linkedHashMap.put("deviceKey", ApiUrlManager.DEVICE_KEY + "");
         linkedHashMap.put("shortMsg", shortMsg + "");

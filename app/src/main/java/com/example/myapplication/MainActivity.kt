@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             }
         activity_main_msg_click_tv.setOnClickListener {
             ThreadUtil.executeMore(Runnable {
-                NetApiUtil2.PostWaitOrder(this@MainActivity,"1111","1111",1.00,"")
+                NetApiUtil2.PostWaitOrder(this@MainActivity,"1111","1111",1.00)
             })
         }
     }
